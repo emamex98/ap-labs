@@ -1,25 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const int month_day(int year, int day){
+void month_day(int year, int day, char *month[], char *days[]){
 
     int leap = year%4 == 0 && year%100 != 0 || year%400 == 0;
-
-    static char *month[] = {
-       "", "January", "February", "March",
-       "April", "May", "June",
-       "July", "August", "September",
-       "October", "November", "December"
-    };
-
-    static char *days[] = {
-       "", "01", "02", "03", "04", "05",
-       "06", "07", "08", "09", "10", "11",
-       "12", "13", "14", "15", "16", "17",
-       "18", "19", "20", "21", "22", "23",
-       "24", "25", "26", "27", "28", "29",
-       "30", "31"
-    };
 
     if (day>0 && day<=31){
         printf("%s %s %d \n", month[1], days[day], year);
@@ -78,10 +62,28 @@ const int month_day(int year, int day){
             printf("Invalid Day \n");
         }
     }
-    return 0;
+
 }
 
 int main(int argc, char *argv[]) {
-    month_day(atoi(argv[1]), atoi(argv[2]));
+
+    static char *month[] = {
+       "", "January", "February", "March",
+       "April", "May", "June",
+       "July", "August", "September",
+       "October", "November", "December"
+    };
+
+    static char *days[] = {
+       "", "01", "02", "03", "04", "05",
+       "06", "07", "08", "09", "10", "11",
+       "12", "13", "14", "15", "16", "17",
+       "18", "19", "20", "21", "22", "23",
+       "24", "25", "26", "27", "28", "29",
+       "30", "31"
+    };
+
+
+    month_day(atoi(argv[1]), atoi(argv[2]), month, days);
     return 0;
 }
