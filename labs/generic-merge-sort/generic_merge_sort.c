@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void mergeInt(void* arr, int l, int m, int r, int type){
+void merge(void* arr, int l, int m, int r, int type){
 
     int i, j, k; 
     int n1 = m - l + 1; 
@@ -97,15 +97,15 @@ void mergeInt(void* arr, int l, int m, int r, int type){
 
 }
 
-void mergeSortInt(void *arr, int l, int r, int type) 
+void mergeSort(void *arr, int l, int r, int type) 
 {    
     if (l < r) 
     { 
         int m = l+(r-l)/2; 
   
-        mergeSortInt(arr, l, m, type); 
-        mergeSortInt(arr, m+1, r, type); 
-        mergeInt(arr, l, m, r, type); 
+        mergeSort(arr, l, m, type); 
+        mergeSort(arr, m+1, r, type); 
+        merge(arr, l, m, r, type); 
     } 
 } 
 
@@ -142,9 +142,9 @@ int main(int argc, char *argv[])
     }
 
     if(numeric){
-        mergeSortInt(numbers, 0, nlines - 1, numeric); 
+        mergeSort(numbers, 0, nlines - 1, numeric); 
     } else {
-        mergeSortInt(words, 0, nlines - 1, numeric); 
+        mergeSort(words, 0, nlines - 1, numeric); 
     }
 
     if(numeric){
