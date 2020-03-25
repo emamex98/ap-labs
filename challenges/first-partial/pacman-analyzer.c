@@ -426,3 +426,4 @@ void analizeLog(char *logFile, char *report) {
     printf("Generating Report from: [%s] log file\n", logFile);
     printf("Report is generated at: [%s]\n", report);
 }
+
