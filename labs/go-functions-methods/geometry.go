@@ -24,6 +24,7 @@ func (p Point) Distance(q Point) float64 {
 func RandFloat() float64 {
 	rand.Seed(time.Now().UnixNano())
 	var r = -100.0 + rand.Float64()*(200)
+
 	return math.Floor(r*10) / 10
 }
 
