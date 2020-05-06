@@ -7,6 +7,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -15,16 +17,35 @@ import (
 
 //!+
 func main() {
-	conn, err := net.Dial("tcp", "localhost:8000")
+
+	// Handle flags
+	username := flag.String("user", "", "username")
+	server := flag.String("server", "", "host:port")
+
+	flag.Parse()
+
+	if *username == "" || *server == "" {
+		fmt.Printf("Missing arguments. Usage: go run client.go -user <username> -server <host>:<port>")
+		return
+	}
+
+	conn, err := net.Dial("tcp", *server)
+
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Pass username to server
+	fmt.Fprintf(conn, *username+"$")
+
 	done := make(chan struct{})
+
 	go func() {
 		io.Copy(os.Stdout, conn) // NOTE: ignoring errors
-		log.Println("done")
-		done <- struct{}{} // signal the main goroutine
+		log.Println("** Exited chat. **")
+		os.Exit(1)
 	}()
+
 	mustCopy(conn, os.Stdin)
 	conn.Close()
 	<-done // wait for background goroutine to finish
