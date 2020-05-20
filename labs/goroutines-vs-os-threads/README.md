@@ -13,6 +13,12 @@ General Requirements and Considerations
 - Don't forget to handle errors properly.
 - Coding best practices implementation will be also considered.
 
+How to run
+=======================
+```
+go run 94.go // Press Ctrl+C to interrupt, report will still be generated
+go run 95.go <number-of-pingpiongs>
+```
 
 How to submit your work
 =======================
